@@ -1,4 +1,4 @@
-# Satranç Uygulaması
+# Satranç Uygulaması: ChessPvP
 
 Karşılıklı iki oyuncunun satranç oynayabilmesi için tasarlanmış bir satranç uygulaması. Bu proje, JavaScript, HTML ve CSS becerilerimi geliştirmek için hazırlanmıştır ve eğlenceli, özelliklerle zenginleştirilmiş bir oyun sunar.
 
@@ -14,6 +14,25 @@ Karşılıklı iki oyuncunun satranç oynayabilmesi için tasarlanmış bir satr
 - **Dönen Tahta:** Tahtanın dönmesini özelleştirerek konforlu bir oyun deneyimi elde edin.
 - **Ses Efectleri:** Daha keyifli bir oyun deneyimi için sesin açık olduğundan emin olun.
 - **Otamatik Kaydetme:** Olası bir kesintide oyununuza kaldığınız yerden devam edin.
+
+---
+
+## Ekran Görüntüleri
+
+![](https://github.com/AygnAyx/Chess-PvP-2.0/blob/main/ChessPvP.gif)
+
+---
+
+## Nasıl Oynanır?
+
+1. Bilgisayarınızdan veya Telefonuzdan çalıştırabilirsiniz.
+   1. [Uygulamayı tarayıcınızda açın](https://aygnayx.github.io/Chess-PvP-2.0/).
+   2. QR Kodu taratın
+   
+      ![](https://github.com/AygnAyx/Chess-PvP-2.0/blob/main/qrcode.png)
+2. Oyunu isteğinize göre özelleştirip başlatın.
+3. Taşları hareket ettirmek için fare ile önce taşı sonra hamle karesini tıklayın.
+4. Oyunun tadını çıkarın.
 
 ---
 
@@ -39,25 +58,6 @@ Karşılıklı iki oyuncunun satranç oynayabilmesi için tasarlanmış bir satr
 
 ---
 
-## Nasıl Oynanır?
-
-1. Bilgisayarınızdan veya Telefonuzdan çalıştırabilirsiniz.
-   1. [Uygulamayı tarayıcınızda açın](https://aygnayx.github.io/Chess-PvP-2.0/).
-   2. QR Kodu taratın
-   
-      ![](https://github.com/AygnAyx/Chess-PvP-2.0/blob/main/qrcode.png)
-2. Oyunu isteğinize göre özelleştirip başlatın.
-3. Taşları hareket ettirmek için fare ile önce taşı sonra hamle karesini tıklayın.
-4. Oyunun tadını çıkarın.
-
----
-
-## Ekran Görüntüleri
-
-![](https://github.com/AygnAyx/Chess-PvP-2.0/blob/main/ChessPvP.gif)
-
----
-
 ## Katkıda Bulunma
 
 Katkılarınız memnuniyetle karşılanır! Katkıda bulunmak için:
@@ -76,8 +76,6 @@ Katkılarınız memnuniyetle karşılanır! Katkıda bulunmak için:
    git push origin ozellik-adi
    ```
 5. Bir Pull Request oluşturun.
-
----
 
 ---
 
