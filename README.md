@@ -46,11 +46,9 @@ Karşılıklı iki oyuncunun satranç oynayabilmesi için tasarlanmış bir satr
    2. QR Kodu taratın
    
       ![](https://github.com/AygnAyx/Chess-PvP-2.0/blob/main/qrcode.png)
-2. Taşları hareket ettirmek için fare ile önce taşı sonra hamle karesini tıklayın.
-3. **Tema Ayarları** özelliğini kullanarak tahtanın görünümünü özelleştirin.
-4. Hamle sürelerini takip edin ve stratejinizi planlayın.
-5. Hatalarınızı düzeltmek için **Geri Al** butonunu kullanın.
-6. Olası hamleleri görmek için **Hamle Öngörüsü** özelliğini izleyin.
+2. Oyunu isteğinize göre özelleştirip başlatın.
+3. Taşları hareket ettirmek için fare ile önce taşı sonra hamle karesini tıklayın.
+4. Oyunun tadını çıkarın.
 
 ---
 
