@@ -44,6 +44,7 @@ Karşılıklı iki oyuncunun satranç oynayabilmesi için tasarlanmış bir satr
 1. Bilgisayarınızdan veya Telefonuzdan çalıştırabilirsiniz.
    1. [Uygulamayı tarayıcınızda açın](https://aygnayx.github.io/Chess-PvP-2.0/).
    2. QR Kodu taratın
+   
       ![](https://github.com/AygnAyx/Chess-PvP-2.0/blob/main/qrcode.png)
 2. Taşları hareket ettirmek için fare ile önce taşı sonra hamle karesini tıklayın.
 3. **Tema Ayarları** özelliğini kullanarak tahtanın görünümünü özelleştirin.
