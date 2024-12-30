@@ -41,7 +41,7 @@ Karşılıklı iki oyuncunun satranç oynayabilmesi için tasarlanmış basit bi
 
 ## Nasıl Oynanır?
 
-1. Uygulamayı tarayıcınızda açın.
+1. [Uygulamayı tarayıcınızda açın](https://aygnayx.github.io/Chess-PvP-2.0/).
 2. Taşları hareket ettirmek için fare ile önce taşı sonra hamle karesini tıklayın.
 3. **Tema Ayarları** özelliğini kullanarak tahtanın görünümünü özelleştirin.
 4. Hamle sürelerini takip edin ve stratejinizi planlayın.
