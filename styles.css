@@ -1,0 +1,894 @@
+/* Root element for scaling */
+html {
+    font-size: 16px; /* Default font size */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background:
+    radial-gradient(35.36% 35.36% at 100% 25%,#0000 66%,#ffe15c 68% 70%,#0000 72%) 10px 10px/calc(2*10px) calc(2*10px),
+    radial-gradient(35.36% 35.36% at 0    75%,#0000 66%,#ffe15c 68% 70%,#0000 72%) 10px 10px/calc(2*10px) calc(2*10px),
+    radial-gradient(35.36% 35.36% at 100% 25%,#0000 66%,#ffe15c 68% 70%,#0000 72%) 0 0/calc(2*10px) calc(2*10px),
+    radial-gradient(35.36% 35.36% at 0    75%,#0000 66%,#ffe15c 68% 70%,#0000 72%) 0 0/calc(2*10px) calc(2*10px),
+    repeating-conic-gradient(#c7a660 0 25%,#0000 0 50%) 0 0/calc(2*10px) calc(2*10px),
+    radial-gradient(#0000 66%,#ffe15c 68% 70%,#0000 72%) 0 calc(10px/2)/10px 10px
+    #c7a660;
+    font-family: 'Helvetica Neue', sans-serif; /* Yazı tipi */
+    color: #444; /* Yazı rengi */
+}
+
+
+/* Tahta ve hücre boyutlarını küçültmek için */
+#chessboard {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #000; /* Border'ı küçülttük */
+    -webkit-box-shadow: 5px 10px 25px 6px #000;
+       -moz-box-shadow: 5px 10px 25px 6px #000000;
+            box-shadow: 5px 10px 25px 6px #000;
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+    background-color: #fff;
+    border-radius: 10px;
+    z-index: 0; /* İçeriği karenin arkasına yerleştir */
+}
+/* Kareler */
+.square {
+    width: 70px; /* 60px'den 80px'e çıkarıldı */
+    height: 70px; /* 60px'den 80px'e çıkarıldı */
+    border: 0.75px solid #333; /* Border'ı da orantılı olarak büyüttük */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.row {
+    display: flex;
+}
+
+
+/* Taşlar */
+.piece {
+    width: 63px; /* 55px'den 73px'e çıkarıldı */
+    height: 63px; /* 55px'den 73px'e çıkarıldı */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+/* Renkler */
+/* Kare Renkleri */
+.square.white {
+    background-color: #eee0bb;
+    z-index: 0; /* İçeriği karenin arkasına yerleştir */
+}
+.square.black {
+    background-color: #c8a340;
+    z-index: 0; /* İçeriği karenin arkasına yerleştir */
+}
+.square.select.back::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(247, 250, 100, 0.856); /* Arka plan rengi ve opaklık */
+    z-index: -1; /* İçeriği karenin arkasına yerleştir */
+}
+.square.select::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 255, 242, 0.7); /* Arka plan rengi ve opaklık */
+    z-index: -1; /* İçeriği karenin arkasına yerleştir */
+}
+.square.select.circle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 255, 242, 0.7); /* select arka plan rengi */
+    z-index: -1;
+}
+.square.black.select.point::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 255, 242, 0.7); /* mavi arka plan rengi */
+    z-index: -1;
+}
+.square.white.select.point::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 255, 242, 0.7); /* mavi arka plan rengi */
+    z-index: -1;
+}
+.square.black.select.point::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px; /* Nokta genişliği */
+    height: 20px; /* Nokta yüksekliği */
+    background-color: rgba(141, 141, 141, 0.5); /* Nokta rengi ve opaklık */
+    border-radius: 50%; /* Tam bir nokta oluşturur */
+    box-sizing: border-box;
+    pointer-events: none;
+}
+.square.white.select.point::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px; /* Nokta genişliği */
+    height: 20px; /* Nokta yüksekliği */
+    background-color: rgba(141, 141, 141, 0.5); /* Nokta rengi ve opaklık */
+    border-radius: 50%; /* Tam bir nokta oluşturur */
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.square.select.back.circle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(247, 250, 100, 0.856); /* mavi arka plan rengi */
+    z-index: -1;
+}
+.square.select.back.circle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(247, 250, 100, 0.856); /* mavi arka plan rengi */
+    z-index: -1;
+}
+.square.select.back.point::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(247, 250, 100, 0.856); /* mavi arka plan rengi */
+    z-index: -1;
+}
+.square.black.select.back.point:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(247, 250, 100, 0.856); /* mavi arka plan rengi */
+    z-index: -1;
+}
+.square.white.select.back.point:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(247, 250, 100, 0.856); /* mavi arka plan rengi */
+    z-index: -1;
+}
+
+.square.point::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 10px solid;
+    border-color: rgba(141, 141, 141, 0.5); /* Çember rengi ve opaklık */
+    border-radius: 50%; /* Tam bir çember oluşturur */
+    box-sizing: border-box;
+    pointer-events: none; /* Çemberin tıklamaları engellemesi */
+}
+.square.circle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; /* Çember genişliği */
+    height: 100%; /* Çember yüksekliği */
+    border: 2px solid;
+    border-color: rgba(141, 141, 141, 0.5); /* Çember rengi ve opaklık */
+    border-radius: 50%; /* Tam bir çember oluşturur */
+    box-sizing: border-box;
+    pointer-events: none; /* Çemberin tıklamaları engellemesi */
+}
+.square.select.circle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; /* Çember genişliği, kutunun içini kaplamasın diye biraz küçülttük */
+    height: 100%; /* Çember yüksekliği */
+    border: 2px solid;
+    border-color: rgba(141, 141, 141, 0.5); /* Çember rengi ve opaklık */
+    border-radius: 50%; /* Tam bir çember oluşturur */
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+
+/* Harf çizelgesi hücreleri */
+.label-cell {
+    width: 70px; /* 80px'den 70px'e küçültüldü */
+    height: 30px; /* 33px'den 30px'e küçültüldü */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d8a443;
+    font-weight: bold;
+    border: 0.5px solid #fff; /* Border'ı küçülttük */
+    font-size: 18px; /* Font boyutu küçültüldü */
+    color: white;
+}
+/* Harf çizelgesi satır */
+.label-row {
+    display: flex;
+    justify-content: center; /* İçerikleri yatayda ortala */
+}
+
+/* Sayı çizelgesi hücreleri */
+.number-label {
+    width: 30px; /* 33px'den 30px'e küçültüldü */
+    height: 70px; /* 80px'den 70px'e küçültüldü */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d8a443;
+    font-weight: bold;
+    border: 0.5px solid #ffffff; /* Border'ı küçülttük */
+    font-size: 18px; /* Font boyutu küçültüldü */
+    color: white;
+}
+
+
+
+/* Açılan Pencere Ayarları */
+/* Piyon promosyon */
+#promotion-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Siyah arka plan, %70 opak */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#promotion-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    max-width: 500px; /* Konteynır genişliği */
+    width: 100%;
+    padding-bottom: 30px; /* Alttan biraz daha büyük */
+}
+
+#promotion-box h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: black;
+    border-bottom: 1px solid black; /* Başlığın altına çizgi */
+    padding-bottom: 10px;
+}
+
+.promotion-options {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Taş kutularının üstüne boşluk */
+}
+
+/* Taşlar için stil */
+.piece-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90px; /* Taş kutusu genişliği */
+    height: 90px; /* Taş kutusu yüksekliği */
+    text-align: center;
+    border: 2px solid black; /* Kutuların dış çerçevesi siyah */
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 10px; /* Kutular arasındaki boşluğu azalt */
+}
+/* Taşlar için stil */
+.piece-container:hover {
+    transform: scale(1.1);
+    background-color: #47ff66;
+}
+
+.piece-container img {
+    width: 70px; /* Taş görseli boyutu */
+    height: 70px; /* Taş görseli boyutu */
+    margin-bottom: 5px; /* Taş ve isim arasındaki boşluk */
+}
+
+.piece-container span {
+    color: black; /* Taş isimleri siyah renk */
+    font-size: 18px;
+    margin: 8px;
+}
+
+/* Beyaz taş kutusu */
+.white-piece-container {
+    background-color: black; /* Beyaz taşlar için siyah arka plan */
+    color: white;
+}
+
+/* Siyah taş kutusu */
+.black-piece-container {
+    background-color: white; /* Siyah taşlar için beyaz arka plan */
+    color: black;
+}
+
+
+
+/* Oyun Sonrası Penceresi */
+/* Kapatma ikonu ve diyalog penceresi için stil tanımları */
+#custom-promotion-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(76, 175, 80, 0.75);
+    border: 2px solid #45a049;
+    width: 20%;
+    height: 20vh;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+}
+
+/* Title */
+#custom-promotion-dialog h2 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 32px;
+}
+
+/* Subtitle */
+#custom-promotion-dialog p {
+    color: white;
+    margin-bottom: 25px;
+}
+
+/*Restart Buton*/
+#custom-promotion-dialog button {
+    margin-top: -5px;
+    background-color: #45a049;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#custom-promotion-dialog button:hover {
+    background-color: #4CAF50;
+}
+
+/* Kapatma Butonu */
+.close-icon::before {
+    content: '\2716';
+    font-size: 24px;
+    line-height: 28px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.close-icon {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    padding: 8px;
+    background-color: red;
+    color: white;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.close-icon:hover {
+    background-color: darkred;
+}
+
+/* Taş Simgesi */
+#king-image {
+    position: absolute;
+    top: -50px; /* Yüksekliğin yarısı kadar yukarı taşı */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px; /* Genişlik ayarı */
+    height: 100px; /* Yükseklik ayarı */
+    z-index: 1;
+}
+
+
+/*Açılış Ekranı Ayarları */
+/* Ana ekran için stil */
+#opening-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Siyah arka plan, %70 opak */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Diyalog kutusu stil */
+#dialog-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+}
+
+#dialog-box h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: black;
+}
+
+#dialog-box hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, #ccc, #333, #ccc);
+    margin-bottom: 20px;
+}
+
+/* Etiket ve butonlar için ortak stil */
+.option-container {
+    display: flex;
+    align-items: center; /* Dikeyde ortalama */
+    justify-content: space-between; /* Yatayda genişletme */
+    margin: 10px 0;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+}
+
+.option-container label {
+    flex: 1;
+    text-align: left;
+}
+
+/* Kullanılmıyor */
+.option-container .switch {
+    margin-left: 10px;
+}
+
+/* Toggle düğmesi stili */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+input:checked + .slider {
+    background-color: #9ddb00;
+}
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Range Ayarları Önceki 
+.range-slider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.range-slider input[type="range"] {
+    width: 100%;
+}
+.range-slider-output {
+    margin-top: 10px;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+}
+*/
+
+/* Butonlar için stil */
+#dialog-box .button-group {
+    display: flex;
+    justify-content: space-between;
+}
+#dialog-box button {
+    width: 48%;
+    padding: 10px;
+    font-size: 18px;
+    background-color: #9ddb00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 4px 1px 0px #888;
+       -moz-box-shadow: 0px 4px 1px 0px #888;
+            box-shadow: 0px 4px 1px 0px #888;
+}
+#dialog-box button:hover {
+    background-color: #a5e600;
+}
+
+/* Time options Stiller */
+.time-option-container {
+    margin-bottom: 10px;
+}
+/* Yazılar */
+.time-option-container label {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+    margin-bottom: 5px;
+}
+.time-option-container .time-selection {
+    font-weight: bold;
+    margin-left: auto;
+}
+
+.time-option-container .range-slider-output {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+/* type range Ayarları */
+.time-option-container input[type="range"] {
+    margin: auto;
+    appearance: none;
+    width: 300px;
+    height: 10px;
+    border: 1px solid #333333;
+    border-radius: 9999px;
+    cursor: pointer;
+    margin-top: 20px; /* Yukarıdan boşluk */
+    margin-bottom: 15px; /* Aşağıdan boşluk */
+}
+
+/* Thumb: for Chrome, Safari, Edge */
+.time-option-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #333333;
+    border-radius: 9999px;
+    background: #86ba00;
+}
+
+/* Thumb: for Firefox */
+.time-option-container input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #333333;
+    border-radius: 9999px;
+    background: #86ba00;
+}
+
+
+
+/* Zaman Göstergesi Ayarları */
+/* Ana konteyner ayarları */
+.main-container {
+    display: flex;
+    flex-direction: column; /* Kutuları dikey olarak hizalar */
+    align-items: center; /* Kutuları yatay olarak ortalar */
+    gap: 20px; /* Kutular arasındaki boşluk */
+}
+
+/* Zaman Göstergesi Ayarları */
+.time-container {
+    display: flex;
+    justify-content: center; /* Kutuyu yatay olarak ortalar */
+    margin: -10px;
+}
+
+.time-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Butonları ve sayaçı kutunun kenarlarına yerleştirir */
+    width: 150px;
+    height: 30px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 30px; /* Kutunun köşelerini yuvarlar */
+    position: relative;
+    -webkit-box-shadow: 0px 4px 1px 0px #888;
+    -moz-box-shadow: 0px 4px 1px 0px #888;
+         box-shadow: 0px 4px 1px 0px #888;
+}
+
+.time-box.inverted {
+    background-color: black;
+}
+
+.timer {
+    font-size: 24px;
+    color: black;
+    text-align: center; /* Sayaç içeriğini ortalar */
+    flex: 1; /* Ortadaki sayaç kutusunun ortalanmasını sağlar */
+}
+
+.timer.inverted {
+    color: white;
+    pointer-events: none; /* Sayaç üzerindeki etkileşimi devre dışı bırakır */
+}
+
+.round-button {
+    width: 43px;
+    height: 43px;
+    border-radius: 50%; /* Butonları yuvarlak yapar */
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute; /* Butonların konumunu ayarlamak için kullanılır */
+}
+
+.round-button.left {
+    left: 3px; /* Sol butonu kutunun içine daha yaklaştırır */
+    text-indent: -2px;
+    font-weight: bold;
+}
+
+.round-button.right {
+    right: 3px; /* Sağ butonu kutunun içine daha yaklaştırır */
+    text-indent: 2px;
+    font-weight: bold;
+}
+.round-button.left:hover,
+.round-button.right:hover {
+    background-color: #818181;
+}
+
+.round-button.inverted {
+    background-color: white;
+    color: black;
+}
+
+.no-hover {
+    pointer-events: none; /* Buton üzerinde hover efektini devre dışı bırakır */
+    color: inherit;
+}
+
+.round-box {
+    margin: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 30px; /* Kutunun köşelerini yuvarlar */
+    background-image: repeating-conic-gradient(#eee0bb 0% 25%, #c8a340 0% 50%);
+    background-position: center;
+    background-size: 20px 20px;
+    background-color: #47d3ff;
+    box-shadow: 3px 3px 10px 3px #dddddd;
+    transition: transform 0.5s ease-in-out; /* Dönme animasyonu için geçiş */
+    cursor: pointer; /* İmleci el işareti yapar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Butonun hover efekti 
+.round-box:hover {
+    transform: scale(1.1); /* Hover olduğunda butonu büyütür
+}
+*/
+
+.round-container{
+    display: flex;
+    align-items: center; /* Dikeyde ortalama */
+    justify-content: space-between; /* Yatayda genişletme */
+    margin: -10px 0;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+}
+
+
+
+
+
+
+
+
+/*Responsif Ayrları
+/* Media queries for additional scaling */
+@media (max-width: 800px) {
+    html {
+        font-size: 14px; /* Smaller base font size */
+    }
+    #custom-promotion-dialog {
+        width: 40%; /* Daha küçük ekranlar için genişliği artır */
+    }
+
+    #custom-promotion-dialog h2 {
+        font-size: 5vw; /* Daha küçük ekranlar için yazı boyutunu artır */
+    }
+
+    #custom-promotion-dialog p {
+        font-size: 2vw;
+    }
+    #custom-promotion-dialog button {
+        font-size: 3vw;
+        padding: 2vw 4vw;
+        margin-top: -15px;
+        padding: 12px 24px;
+
+    }
+    .close-icon::before {
+        font-size: 4vw;
+    }
+    .close-icon {
+        width: 2vw;
+        height: 2vw;
+        padding: 2vw;
+    }
+    #king-image {
+        width: 18vw;
+        height: 18vw;
+        top: -10vw; /* Yüksekliğin yarısı kadar yukarı taşı */
+    }
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 12px; /* Even smaller base font size */
+    }
+    .square {
+        width: 10vw; /* 10vw'den 80px'e çıkarıldı */
+        height: 10vw; /* 10vw'den 80px'e çıkarıldı */
+    }
+    /* Harf çizelgesi hücreleri */
+    .label-cell {
+        width: 10vw; /* 80px'den 10vw'e küçültüldü */
+        height: 30px; /* 33px'den 30px'e küçültüldü */
+        font-size: 3vw; /* Font boyutu küçültüldü */
+    }
+    /* Sayı çizelgesi hücreleri */
+    .number-label {
+        width: 30px; /* 33px'den 30px'e küçültüldü */
+        height: 10vw; /* 80px'den 60px'e küçültüldü */
+        font-size: 3vw; /* Font boyutu küçültüldü */
+    }
+    .piece {
+        width: 9vw; /* 55px'den 73px'e çıkarıldı */
+        height: 9vw; /* 55px'den 73px'e çıkarıldı */
+    }
+    .time-box {
+        width: 25vw;
+        height: 5vw;
+        padding: 2vw;
+        -webkit-box-shadow: 0px 4px 1px 0px #888;
+        -moz-box-shadow: 0px 4px 1px 0px #888;
+             box-shadow: 0px 4px 1px 0px #888;
+    }
+    .timer {
+        font-size: 4vw;
+    }
+    .round-button {
+        width: 8vw;
+        height: 8vw;
+        font-size: 5vw;
+    }
+}
+
+@media (max-width: 400px) {
+    html {
+        font-size: 10px; /* Smallest base font size */
+    }
+}
+
+
+
+
+
+
+
+/*
+.hover-false .round-button.left:hover,
+.hover-false .round-button.right:hover {
+    background-color: inherit;
+}
+
+
+
+.round-button.left.no-hover:hover,
+.round-button.right.no-hover:hover {
+    background-color: black;
+}
+.round-button.inverted.left.no-hover:hover,
+.round-button.inverted.right.no-hover:hover {
+    background-color: white;
+}
+*/
